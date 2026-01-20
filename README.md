@@ -4,7 +4,7 @@
 
 ## What is this?
 
-This is a fun project that combines 3D visuals with generative AI audio. The concept is simple but technically kind of heavy. A frog named DJ Rawg stands at a turntable in a 3D underwater scene. When people in Twitch chat type a prompt (like "play some 80s synthwave" or "sad jazz for a rainy day"), the system actually generates that track from scratch and seamlessy mixes it into the set.
+This is a fun project that combines 3D visuals with generative AI audio. The concept is simple but technically kind of heavy. A frog named DJ Rawg stands at a turntable in a 3D underwater scene. When people in the connected stream's chat type a prompt (like "play some 80s synthwave" or "sad jazz for a rainy day"), the system actually generates that track from scratch and seamlessy mixes it into the set.
 
 There are no playlists and no pre-recorded MP3s. Every single sound you hear is hallucinated by the AI in real-time.
 
@@ -14,7 +14,7 @@ The system is split into two main parts that talk to each other over WebSockets.
 
 **1. The Brain (Backend)**
 *   Written in **Python** using **Flask**.
-*   It listens to Twitch chat via a bot.
+*   It listens to stream chat via a bot.
 *   When a request comes in, it feeds the text into **Meta's AudioCraft** (specifically the MelodyFlow model).
 *   It generates a 30-second loop and analyzes the BPM using Librosa.
 *   It sends the audio URL and the BPM to the frontend.
