@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DJ RAWG // THE FROG</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Luckiest+Guy&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* SOLID PALETTE */
+            --bg-color: #4ECDC4;      /* Flat Teal */
+            --card-bg: #FFFFFF;       /* Pure White */
+            --accent-pink: #FF6B6B;   /* Salmon Pink */
+            --accent-yellow: #FFE66D; /* Bright Yellow */
+            --ink: #000000;           /* Pitch Black Borders */
+            
+            /* SIZING */
+            --border-thick: 4px;
+            --shadow-depth: 8px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            /* A simple geometric pattern for the background */
+            background-image: radial-gradient(var(--ink) 10%, transparent 10%);
+            background-size: 30px 30px;
+            font-family: 'Fredoka', sans-serif;
+            color: var(--ink);
+            overflow-x: hidden;
+            padding-bottom: 100px;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3 {
+            font-family: 'Luckiest Guy', cursive;
+            letter-spacing: 1px;
+            line-height: 1;
+        }
+
+        h1 {
+            font-size: 6rem;
+            color: var(--accent-yellow);
+            /* THE CARTOON STROKE */
+            -webkit-text-stroke: 3px var(--ink);
+            /* THE HARD SHADOW */
+            text-shadow: 6px 6px 0px var(--ink);
+            text-align: center;
+            transform: rotate(-2deg);
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-pink);
+            -webkit-text-stroke: 2px var(--ink);
+            text-shadow: 3px 3px 0px var(--ink);
+        }
+
+        p {
+            font-size: 1.25rem;
+            line-height: 1.6;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- LAYOUT --- */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero {
+            margin-top: 4rem;
+            margin-bottom: 4rem;
+            text-align: center;
+            animation: bounceIn 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .hero-sub {
+            background: var(--ink);
+            color: white;
+            display: inline-block;
+            padding: 10px 20px;
+            font-family: 'Luckiest Guy';
+            font-size: 1.5rem;
+            transform: rotate(2deg);
+            border-radius: 10px;
+        }
+
+        /* --- THE POP ART CARDS --- */
+        .card-row {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: var(--border-thick) solid var(--ink);
+            border-radius: 20px;
+            padding: 2.5rem;
+            position: relative;
+            
+            /* HARD SHADOW - NO BLUR */
+            box-shadow: var(--shadow-depth) var(--shadow-depth) 0px var(--ink);
+            
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 12px 12px 0px var(--ink);
+        }
+
+        /* Alternating Angles for Goofy Vibe */
+        .card:nth-child(odd) {
+            transform: rotate(-1deg);
+        }
+        .card:nth-child(even) {
+            transform: rotate(1deg);
+        }
+        .card:nth-child(odd):hover {
+            transform: rotate(-1deg) translate(-2px, -2px);
+        }
+        .card:nth-child(even):hover {
+            transform: rotate(1deg) translate(-2px, -2px);
+        }
+
+        /* --- TECH STICKERS --- */
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .tag {
+            background: var(--accent-yellow);
+            border: 3px solid var(--ink);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 3px 3px 0px var(--ink);
+            text-transform: uppercase;
+        }
+
+        .tag:nth-child(even) {
+            background: var(--accent-pink);
+            color: white;
+        }
+
+        /* --- DECORATIONS (The Cartoon Bubbles) --- */
+        .bubble-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .bubble {
+            position: absolute;
+            background: rgba(175, 252, 255, 0.788);
+            border: 3px solid var(--ink); /* Thick border on bubbles */
+            border-radius: 50%;
+            bottom: -100px;
+            animation: riseUp linear infinite;
+        }
+
+        /* Add a little shine to the bubble */
+        .bubble::after {
+            content: '';
+            position: absolute;
+            rotate: 30deg;
+            top: 15%;
+            left: 10%;
+            width: 20%;
+            height: 39%;
+            background: white;
+            border-radius: 50%;
+        }
+
+        @keyframes riseUp {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-120vh) rotate(360deg); }
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0); }
+            100% { transform: scale(1); }
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            h1 { font-size: 3.5rem; }
+            .card { transform: none !important; }
+        }
+
+        footer {
+            margin-top: 4rem;
+            text-align: center;
+            font-weight: bold;
+            background: var(--card-bg);
+            display: inline-block;
+            padding: 1rem 2rem;
+            border: 4px solid var(--ink);
+            box-shadow: 6px 6px 0px var(--ink);
+            border-radius: 15px;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        a { color: var(--ink); }
+
+    </style>
+</head>
+<body>
+
+    <!-- Background Bubbles -->
+    <div class="bubble-container" id="bubble-wrap"></div>
+
+    <div class="container">
+        
+        <!-- HEADER -->
+        <div class="hero">
+            <h1>DJ RAWG</h1>
+            <div class="hero-sub">The Underwater AI DJ</div>
+        </div>
+
+        <div class="card-row">
+            
+            <!-- SECTION 1 -->
+            <div class="card">
+                <h2>🐸 What Is This?</h2>
+                <p>
+                    Meet <strong>DJ Rawg</strong>. He's a frog. He lives underwater. He has a turntable.
+                </p>
+                <p>
+                    But here is the crazy part: <strong>He creates music from scratch.</strong> No pre-made playlists. No MP3s. Just raw, AI-generated beats.
+                </p>
+            </div>
+
+            <!-- SECTION 2 -->
+            <div class="card">
+                <h2>🎮 Stream Controlled</h2>
+                <p>
+                    This is an interactive stream experience. The music changes based on <strong>YOU</strong>.
+                </p>
+                <div style="background: #eee; border: 3px solid black; padding: 15px; border-radius: 10px; font-family: monospace; font-weight: bold;">
+                    <span style="color: purple">Frog_#123:</span> Play a fast 80s synthwave track for a car chase!
+                </div>
+                <p style="margin-top: 1rem;">
+                    The system reads that chat message, generates the audio file in real-time, and DJ Rawg spins it immediately.
+                </p>
+            </div>
+
+            <!-- SECTION 3 -->
+            <div class="card" style="text-align: center;">
+                <h2>⚡ The Tech Stack</h2>
+                <p>How do we make a frog smart enough to produce music?</p>
+                <div class="tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">AudioCraft (META)</span>
+                    <span class="tag">Socket.IO</span>
+                    <span class="tag">Three.JS</span>
+                    <span class="tag">Svelte</span>
+                    <span class="tag">Flask</span>
+                </div>
+            </div>
+
+        </div>
+
+        <footer>
+            Built by Buggz, for the Ocean 🌊
+        </footer>
+
+    </div>
+
+    <script>
+        // --- FLAT CARTOON BUBBLE GENERATOR ---
+        const bubbleWrap = document.getElementById('bubble-wrap');
+
+        function spawnBubble() {
+            const b = document.createElement('div');
+            b.classList.add('bubble');
+            
+            // Random Size between 20px and 60px
+            const size = Math.random() * 40 + 20; 
+            b.style.width = size + 'px';
+            b.style.height = size + 'px';
+
+            // Random Left Position
+            b.style.left = Math.random() * 90 + 5 + '%';
+
+            // Random Speed (slower is better for this style)
+            b.style.animationDuration = (Math.random() * 10 + 5) + 's';
+
+            // Remove when done
+            b.addEventListener('animationend', () => {
+                b.remove();
+            });
+
+            bubbleWrap.appendChild(b);
+        }
+
+        // Spawn a bubble every 600ms
+        setInterval(spawnBubble, 600);
+        
+        // Spawn a few immediately so screen isn't empty
+        for(let i=0; i<5; i++) spawnBubble();
+    </script>
+</body>
+</html>
